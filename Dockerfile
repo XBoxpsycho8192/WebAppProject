@@ -1,6 +1,7 @@
-FROM python:3.11-slim-buster
+FROM python:3.11-alpine
 WORKDIR /app
-COPY . /app
-RUN pip3 install -r requirements.txt
-EXPOSE 8081
-CMD python ./app.py
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 5000
+CMD ["python", "app.py"]
