@@ -1,3 +1,4 @@
+/*This will serve as our css style sheet. Right now there is alot unused code because this is a reused file from.*/
 body {
 	background-color: #e7e7e7;
 	color: #221811;}
@@ -18,9 +19,8 @@ h1 {background-color: rgba(179, 242, 255, 0.52);
 	margin-top: -10px;
 	margin-bottom: 0;}
 
-h2 {text-align: center;}
-
-p,h3,h4{
+p,h2,h3,h4 {
+	text-align: center;
 	padding-left: 1em;
 	padding-right: 1em;}
 
@@ -50,19 +50,17 @@ p,h3,h4{
 	margin-left: auto;
 	min-width: 1280px;
 	min-height: 720px;
-font-size: 20px}
+	font-size: 20px}
 
 
 #ProductName, #ProductPrice, #ProductID, #ProductStock{
 	text-align: center;
 	font-size: 30px;
-	margin-bottom: 1em;
-}
+	margin-bottom: 1em;}
 #product_name, #product_price, #product_id, #product_stock{
 	font-size: 30px;
 	width: 300px;
-	height: 30px;
-}
+	height: 30px;}
 
 
 
