@@ -53,6 +53,19 @@ p,h3,h4{
 font-size: 20px}
 
 
+#ProductName, #ProductPrice, #ProductID, #ProductStock{
+	text-align: center;
+	font-size: 30px;
+	margin-bottom: 1em;
+}
+#product_name, #product_price, #product_id, #product_stock{
+	font-size: 30px;
+	width: 300px;
+	height: 30px;
+}
+
+
+
 /*.center_home {*/
 /*	display: block;*/
 /*	margin-left: auto;*/
