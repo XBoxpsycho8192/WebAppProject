@@ -1,0 +1,71 @@
+body {
+	background-color: #e7e7e7;
+	color: #221811;}
+
+nav {
+	font-weight: bold;
+	text-align: center;
+	font-size: 18px;
+	background-color: rgba(181, 246, 227, 0.54)}
+
+nav a {text-decoration: none}
+nav a:link { color: blue;}
+nav a:visited { color: darkcyan;}
+nav a:hover { color: green;}
+
+h1 {background-color: rgba(179, 242, 255, 0.52);
+	text-align: center;
+	margin-top: -10px;
+	margin-bottom: 0;}
+
+h2 {text-align: center;}
+
+p,h3,h4{
+	padding-left: 1em;
+	padding-right: 1em;}
+
+/*#about_us_content {*/
+/*	text-align: center;*/
+/*	padding-left: 15%;*/
+/*	padding-right: 15%;*/
+/*	padding-top: 2em;*/
+/*	font-size: 18px;*/
+/*	margin: auto;}*/
+
+/*#home_text {*/
+/*	text-align: center;*/
+/*	font-size: 20px;*/
+/*	margin: auto}*/
+
+/*#portfolio_content {*/
+/*	text-align: center;*/
+/*	padding-left: 15%;*/
+/*	padding-right: 15%;*/
+/*	padding-top: 2em;*/
+/*	font-size: 17px;*/
+/*	margin: auto}*/
+
+#wrapper {
+	margin-right: auto;
+	margin-left: auto;
+	min-width: 1280px;
+	min-height: 720px;
+font-size: 20px}
+
+
+/*.center_home {*/
+/*	display: block;*/
+/*	margin-left: auto;*/
+/*	margin-right: auto;*/
+/*	width: 50%;*/
+/*	padding-bottom: 1em;}*/
+
+/*.center_portfolio {*/
+/*	display: block;*/
+/*	margin-left: auto;*/
+/*	margin-right: auto;*/
+/*	padding-bottom: 3em;*/
+/*	max-height: 480px;*/
+/*	width: 65%}*/
+
+.italic {font-style: italic}

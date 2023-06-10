@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+    <title>Home Page</title>
+</head>
+<body>
+<div id="wrapper">
+    <Header>
+        <h1>
+            Inventory Management
+        </h1>
+    </Header>
+    <nav>
+        <a href="../templates/index.html">Home Page</a>
+    </nav>
+    {% block content %}
+    <h2>This is the home page.</h2>
+
+    <p>Hello, {{ name }}</p>
+    <script type="text/javascript" src="{{ url_for('static', filename='index.js')}}"></script>
+    {% endblock %}
+</div>
+</body>
+</html>
