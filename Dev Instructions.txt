@@ -1,7 +1,7 @@
 To run the webpage run this command in the terminal: flask --app main run --debug
 
-!!! If you want to work on THIS Project - Do step 4 ONLY.
-
+!!! If you want to work on THIS Project in Windows - Do step 4 ONLY.
+!!! If your not on Windows and need to activate the virtual environment run this command: .venv\Scripts\activate
 
 Starting new flask project:
 1. To make a flask project create a folder that your project will exist in.
