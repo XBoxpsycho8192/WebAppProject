@@ -1,3 +1,4 @@
+<!--This is the home page and template for the webpages.-->
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,7 +17,8 @@
         </h1>
     </Header>
     <nav>
-        <a href="../templates/index.html">Home Page</a>
+        <a href="{{ url_for('views.home')}}">Home Page</a><br>
+        <a href="{{ url_for('views.profile_page')}}">Profile Page</a>
     </nav>
     {% block content %}
     <h2>Input New Inventory</h2>
