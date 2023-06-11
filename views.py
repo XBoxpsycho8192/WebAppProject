@@ -32,3 +32,38 @@ def go_to_home():
 @views.route("profile_page")
 def profile_page():
     return render_template("profile.html")
+
+@views.route('/search', methods=['POST'])
+def search():
+    input = request.form['input']
+    match = None
+
+    # Search through the array of objects
+    for obj in inventory:
+        if input == obj['name']:
+            match = obj
+            break
+    # fill template with matched object
+    return render_template('results.html', match = match)
+
+# constructor
+class Item:
+    def __init__(self, name, price, department, stock):
+        self.name = name
+        self.price = price
+        self.department = department
+        self.stock = stock
+
+# create objects
+wrench = Item("wrench", 19.99, "hardware", 10)
+shirt = Item("shirt", 5.99, "clothing", 57)
+laptop = Item("laptop", 799.99, "electronics", 12)
+tv = Item("tv", 499.99, "electronics", 9)
+pants = Item("pants", 29.99, "clothing", 22)
+
+# create test array
+inventory = [wrench, shirt, laptop, tv, pants]
+
+@views.route("views/result")
+def result():
+    return render_template("result.html")
