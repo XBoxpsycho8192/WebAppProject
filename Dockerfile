@@ -1,7 +1,7 @@
 FROM python:3.11
 
-ADD test.py .
+ADD app.py .
 
-RUN pip install requests
+RUN pip install requests flask
 
-CMD ["python", "test.py"]
+CMD ["python", "app.py"]
