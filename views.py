@@ -1,50 +1,27 @@
-from flask import Blueprint, render_template, request, jsonify,redirect, url_for
-# This file serves as a route map. It tells flask which webpage to load.
+from flask import Blueprint, render_template, request
+
 views = Blueprint(__name__, "views")
 
-# Alot of these routes are for experiments right now.
-# This is the route to the Home Page.
 @views.route("/")
 def home():
-    return render_template("index.html",)
+    return render_template("index.html")
 
+@views.route("results")
+def results():
+    return render_template("results.html")
 
-@views.route("/profile/")
-def profile():
-    args = request.args
-    name = args.get('name')
-    return render_template("index.html",name=name)
-
-@views.route("/json")
-def get_json():
-    return jsonify({'name': 'tim', 'coolness': 10})
-
-@views.route("/data")
-def  get_data():
-    data = request.json
-    return jsonify(data)
-
-@views.route("go-to-home")
-def go_to_home():
-    return redirect(url_for("views.home"))
-
-# This is the route to the Profile Page.
-@views.route("profile_page")
-def profile_page():
-    return render_template("profile.html")
-
-@views.route('/search', methods=['POST'])
+@views.route("/search", methods=["POST"])
 def search():
-    input = request.form['input']
+    input = request.form["input"]
     match = None
 
     # Search through the array of objects
     for obj in inventory:
-        if input == obj['name']:
+        if input == obj["name"]:
             match = obj
             break
     # fill template with matched object
-    return render_template('results.html', match = match)
+    return render_template("views/results.html", match = match)
 
 # constructor
 class Item:
@@ -55,15 +32,12 @@ class Item:
         self.stock = stock
 
 # create objects
-wrench = Item("wrench", 19.99, "hardware", 10)
-shirt = Item("shirt", 5.99, "clothing", 57)
-laptop = Item("laptop", 799.99, "electronics", 12)
-tv = Item("tv", 499.99, "electronics", 9)
-pants = Item("pants", 29.99, "clothing", 22)
+wrench = Item("wrench", 19.99, "hardware", 2929)
+shirt = Item("shirt", 5.99, "clothing", 5722)
+laptop = Item("laptop", 799.99, "electronics", 1222)
+tv = Item("tv", 499.99, "electronics", 9222)
+pants = Item("pants", 29.99, "clothing", 2212)
 
 # create test array
 inventory = [wrench, shirt, laptop, tv, pants]
 
-@views.route("views/result")
-def result():
-    return render_template("result.html")
