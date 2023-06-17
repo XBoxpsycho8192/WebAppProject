@@ -1,0 +1,24 @@
+<!--This file extends off the home page template and can be populated with different elements.-->
+{% extends "index.html" %}
+{% block title %}Inventory Page{% endblock %}
+{% block content %}
+<h1>Inventory</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Department</th>
+            <th>SKU</th>
+            <th>Quantity</th>
+        </tr>
+        {% for product in inventory %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.department }}</td>
+            <td>{{ product.sku }}</td>
+            <td>{{ product.quantity }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

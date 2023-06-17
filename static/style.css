@@ -53,7 +53,7 @@ p,h2,h3,h4 {
 	font-size: 20px}
 
 
-#ProductName, #ProductPrice, #ProductID, #ProductStock{
+#ProductName, #ProductPrice, #ProductID, #ProductStock,name,price,department,quantity{
 	text-align: center;
 	font-size: 30px;
 	margin-bottom: 1em;}
