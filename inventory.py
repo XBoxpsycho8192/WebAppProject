@@ -4,7 +4,7 @@ import glob
 import datetime
 
 # Pre-generated list of departments
-departments = ['Electronics', 'Clothing', 'Office Supplies', 'Sports', 'Books','Grocery']
+departments = ['','Electronics', 'Clothing', 'Office Supplies', 'Sports', 'Books','Grocery']
 # Inventory database
 inventory = []
 
@@ -67,7 +67,7 @@ def add_product(name, price, department, quantity):
 # Function to save the inventory to a file
 def save_inventory():
     now = datetime.datetime.now()
-    filename = now.strftime("%Y-%m-%d_%H-%M-%S") + ".json"
+    filename = "inventoryData.json"
     with open(filename, 'w') as file:
         json.dump(inventory, file)
     print("Inventory saved successfully!")
@@ -80,7 +80,7 @@ def load_most_recent_inventory():
         print("No saved inventory found.")
         return
 
-    latest_file = max(files, key=lambda f: datetime.datetime.strptime(f, "%Y-%m-%d_%H-%M-%S.json"))
+    latest_file = max(files, key=lambda f: datetime.datetime.strptime(f, "inventoryData.json"))
 
     try:
         with open(latest_file, 'r') as file:
@@ -92,11 +92,11 @@ def load_most_recent_inventory():
 
 
 # Function to edit the inventory
-def edit_inventory():
-    sku = input("Enter the SKU of the item to edit: ")
+def edit_inventory(sku_input, quantity_input):
+    sku = sku_input
     for item in inventory:
         if item['sku'] == sku:
-            new_quantity = int(input("Enter the new quantity: "))
+            new_quantity = quantity_input
             if new_quantity == 0:
                 inventory.remove(item)
                 print("Item removed from inventory.")
