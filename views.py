@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for
 from inventory import inventory
-from inventory import departments, add_product
+from inventory import departments, add_product, save_inventory
 
 # This file serves as a route map. It tells flask which webpage to load.
 views = Blueprint(__name__, "views")
@@ -50,6 +50,11 @@ def product_add():
 
     return render_template("add_product.html", departments=departments)
 
+
+@views.route("/save_inventory")
+def inventory_save():
+    save_inventory()
+    return render_template("inventory.html")
 
 
 #  Old work I was not using. think it was in development
