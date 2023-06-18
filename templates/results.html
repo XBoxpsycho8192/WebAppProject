@@ -8,7 +8,8 @@
     {% if match %}
         <ul>
             {% for obj in match %}
-                <li>{{ obj.name }} Price: {{ obj.price }} - {{ obj.department }} - {{ obj.inv }}</li>
+                <h2>{{ obj.name }} <br>
+                    Price: {{ obj.price }} <br> {{ obj.department }} <br> {{ obj.inv }}</h2>
             {% endfor %}
         </ul>
     {% else %}
