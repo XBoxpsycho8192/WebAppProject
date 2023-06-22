@@ -9,11 +9,12 @@
         <ul>
             {% for obj in match %}
                 <h2>{{ obj.name }} <br>
-                    Price: {{ obj.price }} <br> {{ obj.department }} <br> {{ obj.inv }}</h2>
+                    Price: {{ obj.price }} <br> Department: {{ obj.department }} <br> Quantity: {{ obj.quantity }}</h2>
             {% endfor %}
         </ul>
     {% else %}
         <p>We do not carry that item.</p>
     {% endif %}
+    <a href="/index.html">Home</a>
 </body>
 </html>
