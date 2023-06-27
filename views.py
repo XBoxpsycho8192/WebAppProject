@@ -25,17 +25,13 @@ def profile_page():
 
 
 @views.route("inventory_page", methods=["GET", "POST"])
-# def inventory_page():
-#     return render_template("inventory.html", inventory=inventory)
 def inventory_page():
     sort_options = ['name', 'price', 'department', 'sku', 'quantity']
     sorted_inventory = inventory.copy()
-
     if request.method == 'POST':
         sort_key = request.form.get('sort_key')
         if sort_key in sort_options:
             sorted_inventory.sort(key=lambda product: product[sort_key])
-
     return render_template('inventory.html', inventory=sorted_inventory, sort_options=sort_options)
 
 
