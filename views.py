@@ -24,9 +24,19 @@ def profile_page():
     return render_template("profile.html")
 
 
-@views.route("inventory_page")
+@views.route("inventory_page", methods=["GET", "POST"])
+# def inventory_page():
+#     return render_template("inventory.html", inventory=inventory)
 def inventory_page():
-    return render_template("inventory.html", inventory=inventory)
+    sort_options = ['name', 'price', 'department', 'sku', 'quantity']
+    sorted_inventory = inventory.copy()
+
+    if request.method == 'POST':
+        sort_key = request.form.get('sort_key')
+        if sort_key in sort_options:
+            sorted_inventory.sort(key=lambda product: product[sort_key])
+
+    return render_template('inventory.html', inventory=sorted_inventory, sort_options=sort_options)
 
 
 @views.route("/add_product", methods=["GET", "POST"])
@@ -58,3 +68,19 @@ def inventory_edit():
         edit_inventory(sku, quantity)
         return redirect(url_for("views.inventory_page"))
     return render_template("edit_inventory.html")
+
+# search route
+@views.route("/search", methods=["GET", "POST"])
+def search():
+    if request.method == "POST":
+        # Get the user input from the form
+        search = request.form.get("search")
+
+        # Search for matching objects
+        if len(search) != 0:
+            match = []
+            for obj in inventory:
+                if search.lower() in obj["name"].lower():
+                    match.append(obj)
+            return render_template("results.html", match=match)
+    return redirect(url_for("views.inventory_page"))

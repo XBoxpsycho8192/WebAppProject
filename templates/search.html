@@ -1,0 +1,13 @@
+<!--This file extends off the home page template and can be populated with different elements.-->
+{% extends "index.html" %}
+{% block title %}Search Product Page{% endblock %}
+{% block label %}Search Product{% endblock %}
+{% block content %}
+    <form style="justify-content:center; display: flex; margin-top: 10px" action="{{ url_for('views.search') }}" method="post">
+        <input type="text" name="search" placeholder="Enter Item name">
+        <button type="submit">Search</button>
+    </form>
+{% endblock %}
+
+
+

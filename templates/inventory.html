@@ -1,24 +1,35 @@
 <!--This file extends off the home page template and can be populated with different elements.-->
 {% extends "index.html" %}
 {% block title %}Inventory Page{% endblock %}
+{% block label %}Inventory Page{% endblock %}
 {% block content %}
-<h1>Inventory</h1>
-    <table>
+<form  id="sort_form" method="POST" action="{{ url_for('views.inventory_page') }}">
+        <label for="sort_key">Sort by:</label>
+        <select name="sort_key" id="sort_key">
+            {% for option in sort_options %}
+                <option value="{{ option }}">{{ option }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Sort</button>
+    </form>
+<div class="inventory_wrapper" style="text-align: left">
+    <table id="inventory_table" style="margin: 0 auto">
         <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Department</th>
-            <th>SKU</th>
-            <th>Quantity</th>
+            <th>Name:</th>
+            <th>Price:</th>
+            <th style="padding-left: 40px">Department:</th>
+            <th>SKU:</th>
+            <th>Quantity:</th>
         </tr>
         {% for product in inventory %}
         <tr>
-            <td>{{ product.name }}</td>
-            <td>{{ product.price }}</td>
-            <td>{{ product.department }}</td>
-            <td>{{ product.sku }}</td>
-            <td>{{ product.quantity }}</td>
+            <td style="padding-right: 40px; padding-bottom: 10px;">{{ product.name }}</td>
+            <td style="text-align: right; padding-right: 0px; padding-bottom: 10px">{{ product.price }}</td>
+            <td style="padding-right: 40px; padding-bottom: 10px; padding-left: 40px">{{ product.department }}</td>
+            <td style="padding-right: 40px; padding-bottom: 10px;">{{ product.sku }}</td>
+            <td style="text-align: right; padding-right: 0px; padding-bottom: 10px">{{ product.quantity }}</td>
         </tr>
         {% endfor %}
     </table>
+</div>
 {% endblock %}

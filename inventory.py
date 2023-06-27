@@ -106,6 +106,16 @@ def edit_inventory(sku_input, quantity_input):
             return
     print("Item not found in inventory.")
 
+# def search():
+#     # Get the user input from the form
+#
+#
+#     # Search for matching objects
+#     match = []
+#     for obj in inventory:
+#         if search.lower() in obj["name"].lower():
+#             match.append(obj)
+
 
 # Load the most recent inventory at the start of the program
 load_most_recent_inventory()
