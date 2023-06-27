@@ -60,8 +60,10 @@ def inventory_save():
 def inventory_edit():
     if request.method == "POST":
         sku = request.form.get('sku')
-        quantity = int(request.form.get('quantity'))
-        edit_inventory(sku, quantity)
+        name = request.form.get('name')
+        price = request.form.get('price')
+        quantity = request.form.get('quantity')
+        edit_inventory(sku, name, price, quantity)
         return redirect(url_for("views.inventory_page"))
     return render_template("edit_inventory.html")
 

@@ -8,8 +8,14 @@
         <label for="sku" id="sku_label">Enter SKU of Existing Item:</label>
         <input type="sku" id="sku" name="sku" placeholder="SKU" required>
 
+        <label for="name" id="name_label">Enter New Product Name</label>
+        <input type="text" id="name" name="name">
+
+        <label for="price" id="price_label">Enter New Price:</label>
+        <input type="number" id="price" name="price" step="0.01" min="0">
+
         <label for="quantity" id="quantity_label">Enter New Quantity:</label>
-        <input type="number" id="quantity" name="quantity" min="0" required>
+        <input type="number" id="quantity" name="quantity" min="0">
 
         <button type="submit" id="submit_product">Edit Product</button>
     </form>
