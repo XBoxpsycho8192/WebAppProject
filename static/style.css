@@ -7,6 +7,7 @@ nav {
 	font-weight: bold;
 	text-align: center;
 	font-size: 18px;
+	margin-bottom: 0em;
 	background-color: rgba(181, 246, 227, 0.54)}
 
 nav a {text-decoration: none}
@@ -14,69 +15,82 @@ nav a:link { color: blue;}
 nav a:visited { color: darkcyan;}
 nav a:hover { color: green;}
 
+
 h1 {background-color: rgba(179, 242, 255, 0.52);
 	text-align: center;
-	margin-top: -10px;
-	margin-bottom: 0;}
+	margin-top: 0px;
+	margin-bottom: 0px;}
+
 
 p,h2,h3,h4 {
 	text-align: center;
 	padding-left: 1em;
 	padding-right: 1em;}
 
-/*#about_us_content {*/
-/*	text-align: center;*/
-/*	padding-left: 15%;*/
-/*	padding-right: 15%;*/
-/*	padding-top: 2em;*/
-/*	font-size: 18px;*/
-/*	margin: auto;}*/
 
-/*#home_text {*/
-/*	text-align: center;*/
-/*	font-size: 20px;*/
-/*	margin: auto}*/
-
-/*#portfolio_content {*/
-/*	text-align: center;*/
-/*	padding-left: 15%;*/
-/*	padding-right: 15%;*/
-/*	padding-top: 2em;*/
-/*	font-size: 17px;*/
-/*	margin: auto}*/
-
+/*General format for every page.*/
 #wrapper {
-	margin-right: auto;
-	margin-left: auto;
 	min-width: 1280px;
 	min-height: 720px;
 	font-size: 20px}
 
+#page_label{
+	font-weight: bold;
+	font-size: 30px;
+	background-color: lightpink;
+}
 
-#ProductName, #ProductPrice, #ProductID, #ProductStock,name,price,department,quantity{
+/*This effects the input boxes for the add_product page.*/
+#name,#price,#department,#quantity,#sku,#add_product{
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: left;
+	font-size: 25px;
+	margin-bottom: 10px;
+	width: 350px;
+	height: 40px;}
+
+
+/*This effects the input boxes for the add_product page. Slightly fixes the size of two of the boxes*/
+#submit_product,#department{
 	text-align: center;
-	font-size: 30px;
-	margin-bottom: 1em;}
-#product_name, #product_price, #product_id, #product_stock{
-	font-size: 30px;
-	width: 300px;
-	height: 30px;}
+	font-size: 25px;
+	width: 358px;
+	height: 46px;}
 
 
+/*This effects the input boxes label's for the add_product page.*/
+#name_label, #price_label, #department_label, #quantity_label, #sku_label{
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+	margin-bottom: 5px}
 
-/*.center_home {*/
-/*	display: block;*/
-/*	margin-left: auto;*/
-/*	margin-right: auto;*/
-/*	width: 50%;*/
-/*	padding-bottom: 1em;}*/
+#add_product{
+	margin-top: 10px;}
 
-/*.center_portfolio {*/
-/*	display: block;*/
-/*	margin-left: auto;*/
-/*	margin-right: auto;*/
-/*	padding-bottom: 3em;*/
-/*	max-height: 480px;*/
-/*	width: 65%}*/
+/*This effects the top search bar.*/
+#search {
+	background-color: rgba(181, 246, 227, 0.54)}
+
+#search_result{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	font-size: 30px;}
+
+#sort_form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	margin-top: 10px;
+    margin-bottom: 10px;}
+
+#sort_form label,select,button {
+    margin-right: 0.5em;}
+
 
 .italic {font-style: italic}
