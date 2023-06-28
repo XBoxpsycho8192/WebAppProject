@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify, redirect, url_for
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
 from inventory import inventory
 from inventory import departments, add_product, save_inventory, edit_inventory
 
@@ -42,9 +42,8 @@ def product_add():
         price = float(request.form.get('price'))
         department = request.form.get('department')
         quantity = int(request.form.get('quantity'))
-
         add_product(name, price, department, quantity)
-
+        flash('Item added successfully!', 'success')
         return redirect(url_for("views.inventory_page"))
 
     return render_template("add_product.html", departments=departments)
@@ -62,10 +61,12 @@ def inventory_edit():
         sku = request.form.get('sku')
         name = request.form.get('name')
         price = request.form.get('price')
+        department = request.form.get('department')
         quantity = request.form.get('quantity')
-        edit_inventory(sku, name, price, quantity)
+        edit_inventory(sku, name, price, department, quantity)
+        flash('Item edited successfully!', 'success')
         return redirect(url_for("views.inventory_page"))
-    return render_template("edit_inventory.html")
+    return render_template("edit_inventory.html", departments=departments)
 
 # search route
 @views.route("/search", methods=["GET", "POST"])

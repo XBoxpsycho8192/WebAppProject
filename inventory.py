@@ -57,18 +57,21 @@ def load_most_recent_inventory():
 
 
 # Function to edit the inventory
-def edit_inventory(sku_input, name_input, price_input, quantity_input):
+def edit_inventory(sku_input, name_input, price_input, department_input, quantity_input):
     sku = sku_input
     for item in inventory:
         if item['sku'] == sku:
             new_name = name_input
             new_price = price_input
+            new_department = department_input
             new_quantity = quantity_input
 
             if new_name:
                 item['name'] = new_name
             if new_price:
                 item['price'] = float(new_price)
+            if new_department:
+                item['department'] = new_department
             if new_quantity:
                 new_quantity = int(new_quantity)
                 if new_quantity == 0:
@@ -76,10 +79,7 @@ def edit_inventory(sku_input, name_input, price_input, quantity_input):
                     inventory.remove(item)
                 else:
                     item['quantity'] = new_quantity
-
-            print("Item updated successfully.")
             return
-    print("Item not found in inventory.")
 
 
 # Load the most recent inventory at the start of the program

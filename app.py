@@ -2,6 +2,7 @@ from flask import Flask
 from views import views
 
 app = Flask(__name__)
+app.secret_key = 'password'
 app.register_blueprint(views, url_prefix="/")
 
 # This file is what actually starts and runs the web app.

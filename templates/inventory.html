@@ -3,6 +3,7 @@
 {% block title %}Inventory Page{% endblock %}
 {% block label %}Inventory Page{% endblock %}
 {% block content %}
+<h3>Click on a SKU to copy it.</h3>
 <form  id="sort_form" method="POST" action="{{ url_for('views.inventory_page') }}">
         <label for="sort_key">Sort by:</label>
         <select name="sort_key" id="sort_key">
@@ -26,10 +27,21 @@
             <td style="padding-right: 40px; padding-bottom: 10px;">{{ product.name }}</td>
             <td style="text-align: right; padding-right: 0px; padding-bottom: 10px">{{ product.price }}</td>
             <td style="padding-right: 40px; padding-bottom: 10px; padding-left: 40px">{{ product.department }}</td>
-            <td style="padding-right: 40px; padding-bottom: 10px;">{{ product.sku }}</td>
+            <td onclick="copyToClipboard('{{ product.sku }}')" style="padding-right: 40px; padding-bottom: 10px; text-decoration-line: underline; cursor: pointer">{{ product.sku }}</td>
             <td style="text-align: right; padding-right: 0px; padding-bottom: 10px">{{ product.quantity }}</td>
         </tr>
         {% endfor %}
     </table>
 </div>
+<script>
+    function copyToClipboard(sku) {
+        const element = document.createElement('textarea');
+        element.value = sku;
+        document.body.appendChild(element);
+        element.select();
+        document.execCommand('copy');
+        document.body.removeChild(element);
+        alert("Copy Successful")
+    }
+</script>
 {% endblock %}
