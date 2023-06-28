@@ -23,18 +23,32 @@
         <a href="{{ url_for('views.product_add')}}">Add New Product</a><br>
         <a href="{{ url_for('views.inventory_page')}}">View Inventory</a><br>
         <a href="{{ url_for('views.inventory_edit')}}"> Edit Inventory</a><br>
-        <a href="{{ url_for('views.inventory_save')}}"> Save Inventory</a><br>
+        <a onclick="saveAlert()" href="{{ url_for('views.inventory_save')}}">Click to Save Inventory</a><br>
     </nav>
     <div id="search">
-        <form style="justify-content:center; display: flex;" action="/search" method="post" >
+        <form style="padding-top: 4px;padding-bottom: 4px; justify-content:center; display: flex;" action="/search" method="post" >
             <input type="text" name="search" placeholder="Enter Item name">
             <input type="submit" value="Search">
         </form>
     </div>
     <h1 id="page_label">{% block label %}Home Page{% endblock %}</h1>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          {% for message in messages %}
+            <h3 class="flash-message" style="text-align: center">{{ message }}</h3>
+          {% endfor %}
+      {% endif %}
+    {% endwith %}
+
     {% block content %}
 <!--    Webpage content here-->
     {% endblock %}
 </div>
+<script type="text/javascript">
+    function saveAlert(){
+        alert("Inventory Changes Saved")
+    }
+</script>
 </body>
 </html>

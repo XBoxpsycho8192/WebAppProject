@@ -1,4 +1,3 @@
-/*This will serve as our css style sheet. Right now there is alot unused code because this is a reused file from.*/
 body {
 	background-color: #e7e7e7;
 	color: #221811;}
@@ -6,7 +5,7 @@ body {
 nav {
 	font-weight: bold;
 	text-align: center;
-	font-size: 18px;
+	font-size: 22px;
 	margin-bottom: 0em;
 	background-color: rgba(181, 246, 227, 0.54)}
 
@@ -37,7 +36,7 @@ p,h2,h3,h4 {
 #page_label{
 	font-weight: bold;
 	font-size: 30px;
-	background-color: lightpink;
+	background-color: pink;
 }
 
 /*This effects the input boxes for the add_product page.*/
@@ -86,7 +85,7 @@ p,h2,h3,h4 {
     display: flex;
     justify-content: center;
     align-items: center;
-	margin-top: 10px;
+	margin-top: 0px;
     margin-bottom: 10px;}
 
 #sort_form label,select,button {
