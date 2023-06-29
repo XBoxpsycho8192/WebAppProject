@@ -17,6 +17,10 @@
             Inventory Management
         </h1>
     </Header>
+    <nav>
+        <a href="{{ url_for('views.signup')}}">Sign Up Here</a><br>
+        <a href="{{ url_for('views.login')}}">Login Page</a><br>
+    </nav>
     <h1 id="page_label">{% block label %}Login Page{% endblock %}</h1>
 
     {% with messages = get_flashed_messages() %}
@@ -28,17 +32,12 @@
     {% endwith %}
 
     {% block content %} <!--    Webpage content here-->
-<!--<form action="#" method="post">-->
-<!--    <p>Name:</p>-->
-<!--    <p><input type="text" name="nm" /></p>-->
-<!--    <p><input type="submit" value="submit" /></p>-->
-<!--</form>-->
     <form method="POST">
       <label for="email">Email Address</label>
       <input type="email" id="email" name="email" placeholder="Enter email"/>
 
       <label for="password1">Password</label>
-      <input type="password" id="password1" name="password1" placeholder="Enter password"/>
+      <input type="password" id="password1" name="password" placeholder="Enter password"/>
 
       <div></div>
       <button type="submit">Login</button>

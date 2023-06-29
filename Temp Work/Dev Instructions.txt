@@ -39,8 +39,9 @@ To build a new image use the command:   docker build -t xboxpsycho8192/web-inven
 
 
 
-!!To install SQL Database run the command below, AFTER you have activated the virtual enviorment.
+!!To install SQL Database run the command below, AFTER you have activated the virtual environment.
 
 pip install flask-sqlalchemy
+pip install flask-login  <----IF YOUR HAVING TROUBLE STARTING THE APP RUN THESE COMMANDS IN THE TERMINAL!!
 
 I have already updated the dockerfile and requirements.txt so the new database install instructions are part off the dockerfile.

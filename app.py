@@ -1,7 +1,7 @@
 from flask import Flask
 from models import db, DB_NAME
 from views import views
-
+from flask_login import LoginManager
 
 app = Flask(__name__)
 app.secret_key = 'password'
@@ -11,7 +11,14 @@ db.init_app(app)
 
 app.register_blueprint(views, url_prefix="/")
 
+login_manager = LoginManager()
+login_manager.login_view = 'views.login'
+login_manager.init_app(app)
 
+@login_manager.user_loader
+def load_user(id):
+    from models import Users
+    return Users.query.get(int(id))
 
 @app.before_request
 def create_tables():
