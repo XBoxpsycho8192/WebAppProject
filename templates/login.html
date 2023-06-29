@@ -32,15 +32,15 @@
     {% endwith %}
 
     {% block content %} <!--    Webpage content here-->
-    <form method="POST">
-      <label for="email">Email Address</label>
+    <form method="POST" id="login_form">
+      <label for="email" id="email_label">Email Address</label>
       <input type="email" id="email" name="email" placeholder="Enter email"/>
 
-      <label for="password1">Password</label>
+      <label for="password1" id="password_label">Password</label>
       <input type="password" id="password1" name="password" placeholder="Enter password"/>
 
       <div></div>
-      <button type="submit">Login</button>
+      <button type="submit" id="submit_login">Login</button>
     </form>
     {% endblock %}
 </div>
