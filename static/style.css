@@ -40,7 +40,8 @@ p,h2,h3,h4 {
 }
 
 /*This effects the input boxes for the add_product page.*/
-#name,#price,#department,#quantity,#sku,#add_product{
+#name,#price,#department,#quantity,#sku,#add_product, #signup_form
+, #login_form, #email, #firstName, #lastName, #password1, #password2{
 	display: block;
 	margin-right: auto;
 	margin-left: auto;
@@ -52,7 +53,7 @@ p,h2,h3,h4 {
 
 
 /*This effects the input boxes for the add_product page. Slightly fixes the size of two of the boxes*/
-#submit_product,#department{
+#submit_product,#department, #submit_login, #submit_signup{
 	text-align: center;
 	font-size: 25px;
 	width: 358px;
@@ -60,7 +61,8 @@ p,h2,h3,h4 {
 
 
 /*This effects the input boxes label's for the add_product page.*/
-#name_label, #price_label, #department_label, #quantity_label, #sku_label{
+#name_label, #price_label, #department_label, #quantity_label, #sku_label
+, #email_label, #firstName_label, #lastName_label, #password1_label, #password2_label, #password_label{
 	display: block;
 	margin-right: auto;
 	margin-left: auto;
