@@ -3,5 +3,13 @@
 {% block title %}Profile Page{% endblock %}
 {% block label %}Profile Page{% endblock %}
 {% block content %}
-<h2>This is the profile page. This page is a placeholder.</h2>
+<form action="/del_usr" method="POST">
+    <p>Enter User You Wish To Delete:</p>
+    <p><input type="text" name="delete_user" placeholder="First Name"/></p>
+    <p><input type="submit" value="submit"></p>
+</form>
+    {% for item in values %}
+        <p>Name: {{item.firstName}} {{item.lastName}}<br>Email: {{item.email}}</p>
+        <div></div>
+    {% endfor %}
 {% endblock %}

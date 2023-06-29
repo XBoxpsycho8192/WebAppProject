@@ -1,0 +1,48 @@
+<!--This is the login page.-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+    <title>{% block title %}Login Page{% endblock %}</title>
+</head>
+<body>
+
+<div id="wrapper">
+    <Header>
+        <h1>
+            Inventory Management
+        </h1>
+    </Header>
+    <nav>
+        <a href="{{ url_for('views.signup')}}">Sign Up Here</a><br>
+        <a href="{{ url_for('views.login')}}">Login Page</a><br>
+    </nav>
+    <h1 id="page_label">{% block label %}Login Page{% endblock %}</h1>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          {% for message in messages %}
+            <h3 class="flash-message" id="flash_msg">{{ message }}</h3>
+          {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %} <!--    Webpage content here-->
+    <form method="POST">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="Enter email"/>
+
+      <label for="password1">Password</label>
+      <input type="password" id="password1" name="password" placeholder="Enter password"/>
+
+      <div></div>
+      <button type="submit">Login</button>
+    </form>
+    {% endblock %}
+</div>
+</body>
+</html>
