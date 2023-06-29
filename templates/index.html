@@ -20,6 +20,8 @@
     <nav>
         <a href="{{ url_for('views.home')}}">Home Page</a><br>
         <a href="{{ url_for('views.profile_page')}}">Profile Page</a><br>
+        <a href="{{ url_for('views.login')}}">Login Page</a><br>
+        <a href="{{ url_for('views.logout')}}">Press To Logout</a><br>
         <a href="{{ url_for('views.product_add')}}">Add New Product</a><br>
         <a href="{{ url_for('views.inventory_page')}}">View Inventory</a><br>
         <a href="{{ url_for('views.inventory_edit')}}"> Edit Inventory</a><br>
@@ -36,7 +38,7 @@
     {% with messages = get_flashed_messages() %}
       {% if messages %}
           {% for message in messages %}
-            <h3 class="flash-message" style="text-align: center">{{ message }}</h3>
+            <h3 class="flash-message" id="flash_msg">{{ message }}</h3>
           {% endfor %}
       {% endif %}
     {% endwith %}

@@ -3,6 +3,7 @@ import json
 import glob
 import datetime
 
+
 # Pre-generated list of departments
 departments = ['','Electronics', 'Clothing', 'Office Supplies', 'Sports', 'Books','Grocery']
 # Inventory database

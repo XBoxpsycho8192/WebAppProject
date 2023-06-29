@@ -91,5 +91,11 @@ p,h2,h3,h4 {
 #sort_form label,select,button {
     margin-right: 0.5em;}
 
+#flash_msg{
+	display: flex;
+	justify-content: center;
+    align-items: center;
+	text-align: center;
+}
 
 .italic {font-style: italic}
