@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash, session
 from inventory import inventory, departments, add_product, save_inventory, edit_inventory
-from models import Users
+from models import Users, Inventory
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 
@@ -128,14 +128,18 @@ def inventory_page():
 @views.route("/add_product", methods=["GET", "POST"])
 @login_required
 def product_add():
+    from app import db
     if request.method == "POST":
         name = request.form.get('name')
         price = float(request.form.get('price'))
         department = request.form.get('department')
         quantity = int(request.form.get('quantity'))
 
-        add_product(name, price, department, quantity)
+        # add_product(name, price, department, quantity) This is the code for old solution inventory.py
 
+        new_Inv = Inventory(name=name, price=price, department=department, quantity=quantity)
+        db.session.add(new_Inv)
+        db.session.commit()
         flash('Item added successfully!', category='success')
         return redirect(url_for("views.inventory_page"))
     return render_template("add_product.html", departments=departments)
@@ -145,7 +149,9 @@ def product_add():
 @views.route("/save_inventory")
 @login_required
 def inventory_save():
-    save_inventory()
+    from app import db
+    # save_inventory() This is the code for old solution inventory.py
+    db.session.commit()
     return redirect(url_for("views.inventory_page"))
 
 
@@ -153,15 +159,40 @@ def inventory_save():
 @views.route("/edit_inventory", methods=["GET", "POST"])
 @login_required
 def inventory_edit():
+    from app import db
     if request.method == "POST":
         sku = request.form.get('sku')
         name = request.form.get('name')
         price = request.form.get('price')
         department = request.form.get('department')
         quantity = request.form.get('quantity')
-        edit_inventory(sku, name, price, department, quantity)
-        flash('Item edited successfully!', category="success")
-        return redirect(url_for("views.inventory_page"))
+
+        # edit_inventory(sku, name, price, department, quantity) This is the code for old solution inventory.py
+
+        # sku = sku_input
+        # for item in inventory:
+        sku_found = Inventory.query.filter_by(sku=sku).first()
+        if sku_found:
+            new_name = name
+            new_price = price
+            new_department = department
+            new_quantity = quantity
+            if new_name:
+                sku_found.name = name
+            if new_price:
+                sku_found.price = price
+            if new_department:
+                sku_found.department = department
+            if new_quantity:
+                new_quantity = int(new_quantity)
+                if new_quantity == 0:
+                    db.session.delete(sku_found)
+                else:
+                    sku_found.quantity = quantity
+        if new_name or new_price or new_department or new_quantity or new_quantity == 0:
+            db.session.commit()
+            flash('Item edited successfully!', category="success")
+            return redirect(url_for("views.inventory_page"))
     return render_template("edit_inventory.html", departments=departments)
 
 

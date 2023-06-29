@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
+import random
 # This file contains the class for the database.
 
 db = SQLAlchemy()
@@ -17,3 +18,36 @@ class Users(db.Model, UserMixin):
         self.password = password
         self.firstName = firstName
         self.lastName = lastName
+
+class Inventory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    price = db.Column(db.Float(100))
+    department = db.Column(db.String(100))
+    sku = db.Column(db.String(100), unique=True)
+    quantity = db.Column(db.Integer)
+
+    def __init__(self, name, price, department, quantity):
+        self.name = name
+        self.price = price
+        self.department = department
+        self.sku = generate_sku()
+        if self.sku == "error occurred":
+            self.sku == generate_sku()
+        self.quantity = quantity
+
+def generate_sku():
+    sku = str()
+    sku = ''.join(random.choices('CDEFGHJKLNPRTVWXYZ234679', k=8))
+    found_sku = Inventory.query.filter_by(sku=sku).first()
+    if found_sku:
+        sku = ''.join(random.choices('CDEFGHJKLNPRTVWXYZ234679', k=8))
+        found_sku = Inventory.query.filter_by(sku=sku).first()
+        if found_sku:
+            sku = ''.join(random.choices('CDEFGHJKLNPRTVWXYZ234679', k=8))
+            found_sku = Inventory.query.filter_by(sku=sku).first()
+            if found_sku:
+                sku = "error occurred"
+    return sku
+
+
