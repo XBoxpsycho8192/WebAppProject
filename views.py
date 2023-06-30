@@ -93,7 +93,7 @@ def signup():
         elif len(password1) < 7:
             flash("Password is too short. Last name must be greater than 8 character.", category='error')
         else:
-            new_user = Users(email=email, firstName=firstName, lastName=lastName, password=generate_password_hash(password1, method='sha256'))
+            new_user = Users(email=email, firstName=firstName, lastName=lastName, password=generate_password_hash(password1, method='scrypt'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
@@ -150,15 +150,6 @@ def product_add():
         flash('Item added successfully!', category='success')
         return redirect(url_for("views.inventory_page"))
     return render_template("add_product.html", departments=departments)
-
-
-# Function to save the inventory.
-@views.route("/save_inventory")
-@login_required
-def inventory_save():
-    from app import db
-    db.session.commit()
-    return redirect(url_for("views.inventory_page"))
 
 
 # Function to edit the inventory file.

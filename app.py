@@ -18,7 +18,8 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(id):
     from models import Users
-    return Users.query.get(int(id))
+    return db.session.get(Users, int(id))
+
 
 @app.before_request
 def create_tables():
