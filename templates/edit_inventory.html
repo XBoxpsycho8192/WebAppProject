@@ -3,16 +3,17 @@
 {% block title %}Edit Product Page{% endblock %}
 {% block label %}Edit Product{% endblock %}
 {% block content %}
+    <h3>Set 'product quantity' to 0 to remove product from inventory.</h3>
     <form id= "add_product" action="{{ url_for('views.inventory_edit') }}" method="POST">
 
-        <label for="sku" id="sku_label">Enter SKU of Existing Item:</label>
-        <input type="sku" id="sku" name="sku" placeholder="SKU REQUIRED" style="text-align: center;" required>
+        <label for="sku" id="sku_label">Enter SKU of Existing Item:*</label>
+        <input type="sku" id="sku" name="sku" placeholder="SKU REQUIRED" style="text-align: center;" required/>
 
         <label for="name" id="name_label">Enter New Product Name</label>
-        <input type="text" id="name" name="name">
+        <input type="text" id="name" name="name" placeholder="Name"/>
 
         <label for="price" id="price_label">Enter New Price:</label>
-        <input type="number" id="price" name="price" step="0.01" min="0">
+        <input type="number" id="price" name="price" step="0.01" min="0" placeholder="Price"/>
 
         <label for="department" id="department_label">Department</label>
         <select id="department" name="department">
@@ -22,7 +23,7 @@
         </select>
 
         <label for="quantity" id="quantity_label">Enter New Quantity:</label>
-        <input type="number" id="quantity" name="quantity" min="0">
+        <input type="number" id="quantity" name="quantity" min="0" placeholder="Quantity"/>
 
         <button id="submit_product">Edit Product</button>
     </form>

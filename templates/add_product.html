@@ -4,16 +4,16 @@
 {% block label %}Add Product{% endblock %}
 {% block content %}
     <form id= "add_product" action="{{ url_for('views.product_add') }}" method="POST">
-        <label for="name" id="name_label">Product Name</label>
-        <input type="text" id="name" name="name" required>
+        <label for="name" id="name_label">Product Name*</label>
+        <input type="text" id="name" name="name" placeholder="Name"/>
 
-        <label for="price" id="price_label">Price</label>
-        <input type="number" id="price" name="price" step="0.01" min="0" required>
+        <label for="price" id="price_label">Product Price*</label>
+        <input type="number" id="price" name="price" step="0.01" min="0" placeholder="Price" required/>
 
-        <label for="quantity" id="quantity_label">Quantity</label>
-        <input type="number" id="quantity" name="quantity" min="0" required><div></div>
+        <label for="quantity" id="quantity_label">Product Quantity*</label>
+        <input type="number" id="quantity" name="quantity" min="0" placeholder="Quantity"/><div></div>
 
-        <label for="department" id="department_label">Department</label>
+        <label for="department" id="department_label">Product Department*</label>
         <select id="department" name="department" required>
             {% for dept in departments %}
                 <option value="{{ dept }}">{{ dept }}</option>
