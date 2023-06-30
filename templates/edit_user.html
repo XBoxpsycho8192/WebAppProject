@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+{% block title %}Edit Profile{% endblock %}
+{% block label %}Edit Profile Page{% endblock %}
+{% block content %}
+<h4>Enter existing profile email and password to change profile data.</h4>
+<form method="POST" id="signup_form">
+  <label for="email" id="email_label">Email Address*</label>
+  <input type="email" id="email" name="email" placeholder="Enter email" value="{{ user.email }}" required/>
+
+  <label for="password2" id="old_password_label">Current Password*</label>
+  <input type="password" id="old_password" name="old_password" placeholder="Current password" required/>
+
+  <label for="firstName" id="firstName_label">New First Name</label>
+  <input type="text" id="firstName" name="firstName" placeholder="Enter first name" value="{{ user.firstName }}"/>
+
+  <label for="lastName" id="lastName_label">New Last Name</label>
+  <input type="text" id="lastName" name="lastName" placeholder="Enter last name" value="{{ user.lastName }}"/>
+
+  <label for="password1" id="password1_label">New Password</label>
+  <input type="password" id="password1" name="password1" placeholder="Enter password"/>
+
+  <label for="password2" id="password2_label">New Password (Confirm)</label>
+  <input type="password" id="password2" name="password2" placeholder="Confirm password"/>
+  <div></div>
+  <button type="submit" id="submit_signup">Edit Profile</button>
+</form>
+{% endblock %}

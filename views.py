@@ -5,7 +5,8 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 # This file serves as a route map. It tells flask which webpage to load.
 views = Blueprint(__name__, "views")
-departments = ['', 'Electronics', 'Clothing', 'Office Supplies', 'Sports', 'Books', 'Grocery']
+departments = ['', 'Automotive', 'Books', 'Clothing', 'Electronics', 'Grocery', 'Seasonal', 'Office Supplies', 'Sports', 'Tools']
+
 
 # This is the route to the Home Page.
 @views.route("/")
@@ -59,13 +60,13 @@ def del_usr():
     from app import db
     if request.method == "POST":
         delUser = request.form.get("delete_user")  # Use get() to retrieve the form input value
-        found_user = Users.query.filter_by(firstName=delUser).first()
+        found_user = Users.query.filter_by(email=delUser).first()
         if found_user:
             db.session.delete(found_user)
             db.session.commit()
-            flash("User deleted successfully!", category="success")
+            flash("Profile deleted successfully!", category="success")
         else:
-            flash("User not found!", category="error")
+            flash("Profile not found!", category="error")
         return redirect(url_for("views.profile_page"))
 
 
@@ -109,6 +110,54 @@ def signup():
 def profile_page():
     from models import Users
     return render_template("profile.html", values=Users.query.all())
+
+
+# Function to edit the inventory file.
+@views.route("/edit_profile", methods=["GET", "POST"])
+@login_required
+def edit_profile():
+    from app import db
+    user = Users.query.get(current_user.id)
+    if request.method == "POST":
+        email = request.form.get('email')
+        old_password = request.form.get('old_password')
+        firstName = request.form.get('firstName')
+        lastName = request.form.get('lastName')
+        password1 = request.form.get('password1')
+        password2 = request.form.get('password2')
+        user_found = Users.query.filter_by(email=email).first()
+        if user_found:
+            if check_password_hash(user_found.password, old_password):
+                new_firstName = firstName
+                new_lastName = lastName
+                new_password1 = password1
+                new_password2 = password2
+                if new_firstName:
+                    user_found.firstName = new_firstName
+                if new_lastName:
+                    user_found.lastName = new_lastName
+                if new_password1:
+                    if len(new_password1) > 7:
+                        if new_password2:
+                            if new_password1 == new_password2:
+                                user_found.password = generate_password_hash(password1, method='scrypt')
+                            else:
+                                flash("New passwords do not match.", category="error")
+                                return render_template("edit_user.html", user=user)
+                        else:
+                            flash("Please re-enter the new password.", category="error")
+                            return render_template("edit_user.html", user=user)
+                    else:
+                        flash("New password must be at least 8 characters long.", category="error")
+                        return render_template("edit_user.html", user=user)
+
+                if new_firstName or new_lastName or (new_password1 and new_password2):
+                    db.session.commit()
+                    flash('Profile edited successfully!', category="success")
+                    return redirect(url_for("views.profile_page"))
+            else:
+                flash("Incorrect current password.", category="error")
+    return render_template("edit_user.html", user=user)
 
 
 # Function that displays the inventory sheet.
