@@ -1,11 +1,11 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash, session
-from inventory import inventory, departments, add_product, save_inventory, edit_inventory
-from models import Users
+from models import Users, Inventory
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 
 # This file serves as a route map. It tells flask which webpage to load.
 views = Blueprint(__name__, "views")
+departments = ['', 'Electronics', 'Clothing', 'Office Supplies', 'Sports', 'Books', 'Grocery']
 
 # This is the route to the Home Page.
 @views.route("/")
@@ -93,7 +93,7 @@ def signup():
         elif len(password1) < 7:
             flash("Password is too short. Last name must be greater than 8 character.", category='error')
         else:
-            new_user = Users(email=email, firstName=firstName, lastName=lastName, password=generate_password_hash(password1, method='sha256'))
+            new_user = Users(email=email, firstName=firstName, lastName=lastName, password=generate_password_hash(password1, method='scrypt'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
@@ -116,52 +116,76 @@ def profile_page():
 @login_required
 def inventory_page():
     sort_options = ['name', 'price', 'department', 'sku', 'quantity']
-    sorted_inventory = inventory.copy()
+    inventory = Inventory.query.all()
     if request.method == 'POST':
         sort_key = request.form.get('sort_key')
         if sort_key in sort_options:
-            sorted_inventory.sort(key=lambda product: product[sort_key])
-    return render_template('inventory.html', inventory=sorted_inventory, sort_options=sort_options)
+            if sort_key == 'name':
+                inventory.sort(key=lambda product: product.name)
+            elif sort_key == 'price':
+                inventory.sort(key=lambda product: product.price)
+            elif sort_key == 'department':
+                inventory.sort(key=lambda product: product.department)
+            elif sort_key == 'sku':
+                inventory.sort(key=lambda product: product.sku)
+            elif sort_key == 'quantity':
+                inventory.sort(key=lambda product: product.quantity)
+            inventory = Inventory.query.order_by(sort_key).all()
+    return render_template('inventory.html', inventory=inventory, sort_options=sort_options)
 
 
 # Function to add a new product to the inventory.
 @views.route("/add_product", methods=["GET", "POST"])
 @login_required
 def product_add():
+    from app import db
     if request.method == "POST":
         name = request.form.get('name')
         price = float(request.form.get('price'))
         department = request.form.get('department')
         quantity = int(request.form.get('quantity'))
-
-        add_product(name, price, department, quantity)
-
+        new_Inv = Inventory(name=name, price=price, department=department, quantity=quantity)
+        db.session.add(new_Inv)
+        db.session.commit()
         flash('Item added successfully!', category='success')
         return redirect(url_for("views.inventory_page"))
     return render_template("add_product.html", departments=departments)
-
-
-# Function to save the inventory.
-@views.route("/save_inventory")
-@login_required
-def inventory_save():
-    save_inventory()
-    return redirect(url_for("views.inventory_page"))
 
 
 # Function to edit the inventory file.
 @views.route("/edit_inventory", methods=["GET", "POST"])
 @login_required
 def inventory_edit():
+    from app import db
     if request.method == "POST":
         sku = request.form.get('sku')
         name = request.form.get('name')
         price = request.form.get('price')
         department = request.form.get('department')
         quantity = request.form.get('quantity')
-        edit_inventory(sku, name, price, department, quantity)
-        flash('Item edited successfully!', category="success")
-        return redirect(url_for("views.inventory_page"))
+
+        sku_found = Inventory.query.filter_by(sku=sku).first()
+        if sku_found:
+            new_name = name
+            new_price = price
+            new_department = department
+            new_quantity = quantity
+            if new_name:
+                sku_found.name = name
+            if new_price:
+                sku_found.price = price
+            if new_department:
+                sku_found.department = department
+            if new_quantity:
+                new_quantity = int(new_quantity)
+                if new_quantity == 0:
+                    db.session.delete(sku_found)
+                else:
+                    sku_found.quantity = quantity
+        if new_name or new_price or new_department or new_quantity or new_quantity == 0:
+            db.session.commit()
+            flash('Item edited successfully!', category="success")
+            return redirect(url_for("views.inventory_page"))
     return render_template("edit_inventory.html", departments=departments)
 
 
@@ -174,9 +198,11 @@ def search():
         search = request.form.get("search")
         # Search for matching objects
         if len(search) != 0:
-            match = []
-            for obj in inventory:
-                if search.lower() in obj["name"].lower():
-                    match.append(obj)
+            # Start Query on the database.
+            match = Inventory.query.filter(
+                (Inventory.name.ilike(f"%{search}%")) |
+                (Inventory.department.ilike(f"%{search}%")) |
+                (Inventory.sku.ilike(f"%{search}%"))
+            ).all()
             return render_template("results.html", match=match)
     return redirect(url_for("views.inventory_page"))

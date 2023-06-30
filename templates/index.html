@@ -20,12 +20,10 @@
     <nav>
         <a href="{{ url_for('views.home')}}">Home Page</a><br>
         <a href="{{ url_for('views.profile_page')}}">Profile Page</a><br>
-<!--        <a href="{{ url_for('views.login')}}">Login Page</a><br>-->
         <a href="{{ url_for('views.logout')}}">Press To Logout</a><br>
         <a href="{{ url_for('views.product_add')}}">Add New Product</a><br>
         <a href="{{ url_for('views.inventory_page')}}">View Inventory</a><br>
         <a href="{{ url_for('views.inventory_edit')}}"> Edit Inventory</a><br>
-        <a onclick="saveAlert()" href="{{ url_for('views.inventory_save')}}">Click to Save Inventory</a><br>
     </nav>
     <div id="search">
         <form style="padding-top: 4px;padding-bottom: 4px; justify-content:center; display: flex;" action="/search" method="post" >

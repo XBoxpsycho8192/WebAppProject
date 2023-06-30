@@ -18,7 +18,8 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(id):
     from models import Users
-    return Users.query.get(int(id))
+    return db.session.get(Users, int(id))
+
 
 @app.before_request
 def create_tables():
@@ -27,4 +28,4 @@ def create_tables():
 
 # This file is what actually starts and runs the web app.
 if __name__=='__main__':
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(debug=True, host="0.0.0.0", port=5000, ssl_context=('cert.pem', 'key.pem'))
