@@ -1,9 +1,10 @@
-<!--This file extends off the home page template and can be populated with different elements.-->
+<!--This file extends off the index.html template and is populated with profile page elements.-->
 {% extends "index.html" %}
 {% block title %}Profile Page{% endblock %}
 {% block label %}Profile Page{% endblock %}
 {% block content %}
 <form action="/del_usr" method="POST">
+    <h4>Admins can edit any profile's data, without password authentication, on the "Edit Profile" page.</h4>
     <p>Enter profile email to delete profile.</p>
     <p><input type="email" name="delete_user" placeholder="Enter Profile Email"/></p>
     <p><input type="submit" value="submit"></p>

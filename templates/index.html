@@ -1,4 +1,4 @@
-<!--This is the home page and template for the webpages.-->
+<!--This is the template for the webpages.-->
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,10 +19,12 @@
     </Header>
     <nav>
         <a href="{{ url_for('views.logout')}}">Press To Logout</a><br>
+        {% if current_user.role == 'admin' %}
         <a href="{{ url_for('views.profile_page')}}">Profile Page</a><br>
+        {% endif %}
         <a href="{{ url_for('views.edit_profile')}}"> Edit Profile</a><br>
-        <a href="{{ url_for('views.product_add')}}">Add New Product</a><br>
         <a href="{{ url_for('views.inventory_page')}}">View Inventory</a><br>
+        <a href="{{ url_for('views.product_add')}}">Add New Product</a><br>
         <a href="{{ url_for('views.inventory_edit')}}"> Edit Product in Inventory</a><br>
     </nav>
     <div id="search">
@@ -33,6 +35,7 @@
     </div>
     <h1 id="page_label">{% block label %}Home Page{% endblock %}</h1>
 
+<!--    This is used to flash messages to the screen.-->
     {% with messages = get_flashed_messages() %}
       {% if messages %}
           {% for message in messages %}

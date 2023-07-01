@@ -1,3 +1,4 @@
+<!--This file extends off the index.html template and is populated with edit_profile page elements.-->
 {% extends "index.html" %}
 {% block title %}Edit Profile{% endblock %}
 {% block label %}Edit Profile Page{% endblock %}
@@ -7,6 +8,7 @@
   <label for="email" id="email_label">Email Address*</label>
   <input type="email" id="email" name="email" placeholder="Enter email" value="{{ user.email }}" required/>
 
+<!--  An admin can just type anything here to change profile data. It's alot of power.-->
   <label for="password2" id="old_password_label">Current Password*</label>
   <input type="password" id="old_password" name="old_password" placeholder="Current password" required/>
 
