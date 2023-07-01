@@ -1,4 +1,4 @@
-<!--This file extends off the home page template and can be populated with different elements.-->
+<!--This file extends off the index.html template and is populated with inventory page elements.-->
 {% extends "index.html" %}
 {% block title %}Inventory Page{% endblock %}
 {% block label %}Inventory Page{% endblock %}
@@ -33,6 +33,9 @@
         {% endfor %}
     </table>
 </div>
+
+<!--The purpose of this script is for the "click to copy sku" feature on the inventory page.-->
+<!--After tons of product edits I got tired of manually copying skus-->
 <script>
     function copyToClipboard(sku) {
         const element = document.createElement('textarea');

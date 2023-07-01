@@ -1,3 +1,4 @@
+/*This is the css style sheet for the majority of the site. The site uses some inline css but most is external */
 body {
 	background-color: #e7e7e7;
 	color: #221811;}
@@ -52,7 +53,7 @@ p,h2,h3,h4 {
 	height: 40px;}
 
 
-/*This effects the input boxes for the add_product page. Slightly fixes the size of two of the boxes*/
+/*This effects the input boxes for different pages. Also adjusts submit buttons to match some form input boxes.*/
 #submit_product,#department, #submit_login, #submit_signup{
 	text-align: center;
 	font-size: 25px;
@@ -60,7 +61,7 @@ p,h2,h3,h4 {
 	height: 46px;}
 
 
-/*This effects the input boxes label's for the add_product page.*/
+/*This effects the input box's labels for different page.*/
 #name_label, #price_label, #department_label, #quantity_label, #sku_label
 , #email_label, #firstName_label, #lastName_label, #password1_label, #password2_label, #password_label, #old_password_label{
 	display: block;
